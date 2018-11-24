@@ -20,7 +20,8 @@ public class EditorBean {
 	public void submit() {
 		DatabaseEngine  databaseEngine=new DatabaseEngine();
 		//databaseEngine.insertData(this.value);
-		databaseEngine.retrieveData();
+		databaseEngine.updateNote();
+		//databaseEngine.retrieveData();
 		System.out.println("###########"+this.value);
 	}
 }

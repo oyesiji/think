@@ -16,6 +16,12 @@ public class DatabaseEngine {
 	public static final RethinkDB r = RethinkDB.r;
 	private Connection conn;
 	
+	
+	
+	
+	
+	
+	
 	public void save(String record) {
 		
 	}
@@ -55,8 +61,27 @@ public class DatabaseEngine {
 			)).run(conn);
 	}
 	
+	public void updateNote() {
+		/*MapObject newNote = r.hashMap("date_inserted", r.now()).with("imageId", 255).with("userId", 65).with("content",
+				"You killed my father");
+
+		r.table("comments").get("d3ff3daf-03a7-4d3b-b52c-39d4b1d28391")
+				.update(row -> r.hashMap("posts", row.g("posts").append(newNote))).run(conn);*/
+		
+		
+		r.db("test").table("comments").get("84089623-1d97-43d5-b57b-ed993885f93e").update(doc -> r.hashMap("notes",doc.g("notes").merge(notes -> r.hashMap("content", "who there")))).run(conn);
+		
+		
+	
+		 
+		System.out.println("###it worksXXXX #####");
+	}
+	
 	public void updateNotes() {
-		//r.table("comments").get("5827267c-b76a-4b1d-b489-9d9a8a173b13").update(row -> r.hashMap("notes", row.g("notes")))
+		 r.table("comments").filter(row -> row.g("posts").contains(posts ->posts.g("date_inserted").eq(Long.valueOf("1542906694024")) ).update(r.hashMap("userId", 5)) ).run(conn);
+		
+		 System.out.println("### we are here###");
+		
 	}
 	
 	public void retrieveData() {
